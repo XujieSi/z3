@@ -94,7 +94,7 @@ public class InterpolationContext extends Context
      * well documented.
      * @throws Z3Exception 
      **/
-    public Z3_lbool ComputeInterpolant(Expr pat, Params p, ASTVector interp, Model model)
+    public Z3_lbool ComputeInterpolant(Expr pat, Params p, ASTVectorRef interp_ref, ModelRef model_ref)
     {
         checkContextMatch(pat);
         checkContextMatch(p);
@@ -102,8 +102,16 @@ public class InterpolationContext extends Context
         Native.LongPtr n_i = new Native.LongPtr();
         Native.LongPtr n_m = new Native.LongPtr();
         int r = Native.computeInterpolant(nCtx(), pat.getNativeObject(), p.getNativeObject(), n_i, n_m);
-        interp = new ASTVector(this, n_i.value);
-        model = new Model(this, n_m.value);
+        //interp = new ASTVector(this, n_i.value);
+        //model = new Model(this, n_m.value);
+		//System.err.println("Native compute interpolant is done.");
+		//System.err.println("n_i.value = " + n_i.value);
+		if(n_i.value != 0)
+        	interp_ref.set(new ASTVector(this, n_i.value));
+		else
+			interp_ref.set(null);
+        model_ref.set(new Model(this, n_m.value));
+		//System.err.println("will return z3_lbool.");
         return Z3_lbool.fromInt(r);
     }
 
