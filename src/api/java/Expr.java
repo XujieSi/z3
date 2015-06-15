@@ -348,6 +348,16 @@ public class Expr extends AST
     }
 
     /**
+     * Indicates whether the term is a unary interp term
+     * @throws Z3Exception on error
+     * @return a boolean
+     **/
+    public boolean isInterp()
+    {
+        return isApp() && getFuncDecl().getDeclKind() == Z3_decl_kind.Z3_OP_INTERP;
+    }
+
+    /**
      * Indicates whether the term is an n-ary conjunction
      * @throws Z3Exception on error
      * @return a boolean
