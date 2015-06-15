@@ -41,7 +41,7 @@ public class ASTVector extends Z3Object
      **/
     public AST get(int i)
     {
-        return new AST(getContext(), Native.astVectorGet(getContext().nCtx(),
+        return new Expr(getContext(), Native.astVectorGet(getContext().nCtx(),
                 getNativeObject(), i));
     }
 
