@@ -303,6 +303,7 @@ void iz3base::find_children(const stl_ext::hash_set<ast> &cnsts_set,
     std::vector<int> my_children;
     std::vector<ast> my_conjuncts;
     if(op(tree) == Interp){ // if we've hit an interpolation position...
+
         find_children(cnsts_set,arg(tree,0),cnsts,parents,my_conjuncts,my_children,pos_map,merge);
         if(my_conjuncts.empty()) 
             my_conjuncts.push_back(mk_true()); // need at least one conjunct
@@ -315,6 +316,7 @@ void iz3base::find_children(const stl_ext::hash_set<ast> &cnsts_set,
             parents[my_children[i]] = root;
         children.push_back(root);
         pos_map.push_back(root);
+        fprintf(stderr,"SXJ_DBG: find an interp position, pos_map.size=%d\n", (int)pos_map.size());
     }
     else {
         if(op(tree) == And){
@@ -350,9 +352,17 @@ void iz3base::to_parents_vec_representation(const std::vector<ast> &_cnsts,
         cnsts_set.insert(_cnsts[i]);
     ast _tree = (op(tree) != Interp) ? make(Interp,tree) : tree;
     find_children(cnsts_set,_tree,cnsts,parents,my_conjuncts,my_children,pos_map,merge);
+
+    fprintf(stderr,"SXJ_DBG: after find_children, pos_map.size=%d\n",(int)pos_map.size());
+    std::ostringstream buf;
+    buf << op(tree);
+
+    // commented by Xujie Si, because it seems like a bug
     if(op(tree) != Interp) pos_map.pop_back();
     parents[parents.size()-1] = SHRT_MAX;
     
+    fprintf(stderr, "SXJ_DBG: op=%s, pos_map.size=%d\n", buf.str().c_str(), (int)pos_map.size());
+
     // rest of the constraints are the background theory
     
     hash_set<ast> used_set;

@@ -427,6 +427,7 @@ void iz3interpolate(ast_manager &_m_manager,
 		    const ptr_vector<ast> &theory,
 		    interpolation_options_struct * options)
 {
+	fprintf(stderr,"SXJ_DBG: iz3interpolate-A\n");
     iz3interp itp(_m_manager);
     if(options)
         options->apply(itp);
@@ -455,6 +456,7 @@ void iz3interpolate(ast_manager &_m_manager,
 		    const ptr_vector<ast> &theory,
 		    interpolation_options_struct * options)
 {
+	fprintf(stderr,"SXJ_DBG: iz3interpolate-B\n");
     iz3interp itp(_m_manager);
     if(options)
         options->apply(itp);
@@ -483,6 +485,7 @@ void iz3interpolate(ast_manager &_m_manager,
 		    ptr_vector<ast> &interps,
 		    interpolation_options_struct * options)
 {
+	fprintf(stderr,"SXJ_DBG: iz3interpolate-C\n");
     iz3interp itp(_m_manager);
     if(options)
         options->apply(itp);
@@ -513,6 +516,7 @@ lbool iz3interpolate(ast_manager &_m_manager,
 		     model_ref &m,
 		     interpolation_options_struct * options)
 {
+	fprintf(stderr,"SXJ_DBG: iz3interpolate-D\n");
     iz3interp itp(_m_manager);
     if(options)
         options->apply(itp);
@@ -532,11 +536,16 @@ lbool iz3interpolate(ast_manager &_m_manager,
             interps[i] = itp.uncook(_interps[i]);
     }
     else if(m){
+    	//fprintf(stderr, "SXJ_DBG: get_model");
         s.get_model(m);
+    	//fprintf(stderr, "SXJ_DBG: get_model is done.");
+
     }
     cnsts.resize(_cnsts.size());
     for(unsigned i = 0; i < cnsts.size(); i++)
         cnsts[i] = itp.uncook(_cnsts[i]);
+
+    //fprintf(stderr,"SXJ_DBG: iz3interpolate-D finished without crash\n");
     return res;
 }
 

@@ -42,7 +42,7 @@ static void show_interpolant_and_maybe_check(cmd_context & ctx,
 					     params_ref &m_params,
 					     bool check)
 {
-  
+	fprintf(stderr,"SXJ_DBG: show_interpolant_and_maybe_check, interp.size=%d\n",(int) interps.size());
     if (m_params.get_bool("som", false))
         m_params.set_bool("flat", true);
     th_rewriter s(ctx.m(), m_params);
@@ -164,7 +164,12 @@ static void compute_interpolant_and_maybe_check(cmd_context & ctx, expr * t, par
     model_ref m;
   
     // compute an interpolant
-  
+  fprintf(stderr,"SXJ_DBG: compute_interpolant_and_maybe_check\n");
+  std::ostringstream buffer;
+  buffer << "before compute interpolation:\n";
+  buffer << mk_ismt2_pp(t,_m, 2);
+  fprintf(stderr,"SXJ_DBG: %s\n", buffer.str().c_str());
+
     lbool res;
     try {
         res = iz3interpolate(_m, *sp.get(), t, cnsts, interps, m, 0);

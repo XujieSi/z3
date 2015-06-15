@@ -208,7 +208,8 @@ extern "C" {
     }
 
     Z3_ast_vector Z3_API Z3_get_interpolant(__in Z3_context c, __in Z3_ast pf, __in Z3_ast pat, __in Z3_params p){
-        Z3_TRY;
+        fprintf(stderr,"SXJ_DBG: get_interpolant\n");
+    	Z3_TRY;
         LOG_Z3_get_interpolant(c, pf, pat, p);
         RESET_ERROR_CODE();
 
@@ -241,7 +242,8 @@ extern "C" {
     }
 
     Z3_lbool Z3_API Z3_compute_interpolant(__in Z3_context c, __in Z3_ast pat, __in Z3_params p, __out Z3_ast_vector *out_interp, __out Z3_model *model){
-        Z3_TRY;
+        fprintf(stderr,"SXJ_DBG: compute_interpolant\n");
+    	Z3_TRY;
         LOG_Z3_compute_interpolant(c, pat, p, out_interp, model);
         RESET_ERROR_CODE();
 
@@ -290,16 +292,20 @@ extern "C" {
             }
         }
         else {
+        	//fprintf(stderr,"SXJ_DBG: compute_interpolant, come to sat branch\n");
             model_ref _m;
             m_solver.get()->get_model(_m);
             Z3_model_ref *tmp_val = alloc(Z3_model_ref);
             tmp_val->m_model = _m.get();
             mk_c(c)->save_object(tmp_val);
             *model = of_model(tmp_val);
+        	//fprintf(stderr,"SXJ_DBG: compute_interpolant, sat branch is processed without crash\n");
+
         }
 
         *out_interp = of_ast_vector(v);
 
+        //fprintf(stderr,"SXJ_DBG: compute_interpolant will return status");
         return status;
         Z3_CATCH_RETURN(Z3_L_UNDEF);
     }
