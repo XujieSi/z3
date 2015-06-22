@@ -316,7 +316,7 @@ void iz3base::find_children(const stl_ext::hash_set<ast> &cnsts_set,
             parents[my_children[i]] = root;
         children.push_back(root);
         pos_map.push_back(root);
-        fprintf(stderr,"SXJ_DBG: find an interp position, pos_map.size=%d\n", (int)pos_map.size());
+        //fprintf(stderr,"SXJ_DBG: find an interp position, pos_map.size=%d\n", (int)pos_map.size());
     }
     else {
         if(op(tree) == And){
@@ -353,7 +353,7 @@ void iz3base::to_parents_vec_representation(const std::vector<ast> &_cnsts,
     ast _tree = (op(tree) != Interp) ? make(Interp,tree) : tree;
     find_children(cnsts_set,_tree,cnsts,parents,my_conjuncts,my_children,pos_map,merge);
 
-    fprintf(stderr,"SXJ_DBG: after find_children, pos_map.size=%d\n",(int)pos_map.size());
+    //fprintf(stderr,"SXJ_DBG: after find_children, pos_map.size=%d\n",(int)pos_map.size());
     std::ostringstream buf;
     buf << op(tree);
 
@@ -361,7 +361,7 @@ void iz3base::to_parents_vec_representation(const std::vector<ast> &_cnsts,
     if(op(tree) != Interp) pos_map.pop_back();
     parents[parents.size()-1] = SHRT_MAX;
     
-    fprintf(stderr, "SXJ_DBG: op=%s, pos_map.size=%d\n", buf.str().c_str(), (int)pos_map.size());
+    //fprintf(stderr, "SXJ_DBG: op=%s, pos_map.size=%d\n", buf.str().c_str(), (int)pos_map.size());
 
     // rest of the constraints are the background theory
     

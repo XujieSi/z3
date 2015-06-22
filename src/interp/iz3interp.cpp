@@ -427,7 +427,7 @@ void iz3interpolate(ast_manager &_m_manager,
 		    const ptr_vector<ast> &theory,
 		    interpolation_options_struct * options)
 {
-	fprintf(stderr,"SXJ_DBG: iz3interpolate-A\n");
+	//fprintf(stderr,"SXJ_DBG: iz3interpolate-A\n");
     iz3interp itp(_m_manager);
     if(options)
         options->apply(itp);
@@ -456,7 +456,7 @@ void iz3interpolate(ast_manager &_m_manager,
 		    const ptr_vector<ast> &theory,
 		    interpolation_options_struct * options)
 {
-	fprintf(stderr,"SXJ_DBG: iz3interpolate-B\n");
+	//fprintf(stderr,"SXJ_DBG: iz3interpolate-B\n");
     iz3interp itp(_m_manager);
     if(options)
         options->apply(itp);
@@ -485,7 +485,7 @@ void iz3interpolate(ast_manager &_m_manager,
 		    ptr_vector<ast> &interps,
 		    interpolation_options_struct * options)
 {
-	fprintf(stderr,"SXJ_DBG: iz3interpolate-C\n");
+	//fprintf(stderr,"SXJ_DBG: iz3interpolate-C\n");
     iz3interp itp(_m_manager);
     if(options)
         options->apply(itp);
@@ -516,7 +516,7 @@ lbool iz3interpolate(ast_manager &_m_manager,
 		     model_ref &m,
 		     interpolation_options_struct * options)
 {
-	fprintf(stderr,"SXJ_DBG: iz3interpolate-D\n");
+	//fprintf(stderr,"SXJ_DBG: iz3interpolate-D\n"); // the one being called.
     iz3interp itp(_m_manager);
     if(options)
         options->apply(itp);
